@@ -1,0 +1,23 @@
+<% if flash[:alert] %>
+  <p style="background-color: red;">
+    <%= flash[:alert] %>
+  </p>
+<% end %>
+
+<%= form_tag(action: "do_login") do %>
+  <div class="field">
+    <%= label_tag(:name) %>
+    <%= text_field_tag("user[name]") %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:password) %>
+    <%= password_field_tag "user[password]" %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>
+
+<%= link_to "New account", new_user_path %>
