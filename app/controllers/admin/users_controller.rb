@@ -37,9 +37,9 @@ class Admin::UsersController < ApplicationController
         flash.alert = "You need to log in to see this page"
         redirect_to login_path
       else
-        @user = User.find(session[:user_id])
+        @logged_in_as = User.find(session[:user_id])
 
-        unless @user.admin?
+        unless @logged_in_as.admin?
           flash.alert = "Admin privs required"
           redirect_to login_path
         end
