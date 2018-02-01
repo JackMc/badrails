@@ -40,12 +40,12 @@ class UsersController < ApplicationController
   end
 
   def do_login
-    @user = User.login login_params[:name], login_params[:password]
-    if @user
+    @user = User.find_by(name: user_params[:name])
+    if @user&.log_in(user_params[:password])
       session[:user_id] = @user.id
       redirect_to controller: :blogs, action: :index
     else
-      flash.alert = "Name or password incorrect."
+      flash.alert = "Name or password not found."
       redirect_to "/login"
     end
 
