@@ -11,7 +11,6 @@ class BlogsController < ApplicationController
   # GET /blogs/1
   # GET /blogs/1.json
   def show
-    raise ActiveRecord::RecordNotFound if @blog.user != @user && @blog.private?
   end
 
   # GET /blogs/new
@@ -21,7 +20,6 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
-    raise ActiveRecord::RecordNotFound unless @blog.user == @user
   end
 
   # POST /blogs
@@ -44,8 +42,6 @@ class BlogsController < ApplicationController
   # PATCH/PUT /blogs/1
   # PATCH/PUT /blogs/1.json
   def update
-    raise ActiveRecord::RecordNotFound unless @blog.user == @user
-
     respond_to do |format|
       if @blog.update(blog_params)
         format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }
