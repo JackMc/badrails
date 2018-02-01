@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Blogs</h1>
+<h1>Hi <%= @user.name %>! Here are the posts you can see:</h1>
 
 <table>
   <thead>
@@ -36,3 +36,6 @@
 
 <%= link_to 'New Blog', new_blog_path %>
 <%= link_to 'Logout', "/logout" %>
+<% if @user.admin? %>
+  <%= link_to 'Admin', '/admin/users' %>
+<% end %>

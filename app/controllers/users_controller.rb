@@ -40,9 +40,8 @@ class UsersController < ApplicationController
   end
 
   def do_login
-    @user = User.find_by(name: login_params[:name])
-
-    if @user&.log_in login_params[:password]
+    @user = User.login login_params[:name], login_params[:password]
+    if @user
       session[:user_id] = @user.id
       redirect_to controller: :blogs, action: :index
     else
