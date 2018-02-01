@@ -7,8 +7,9 @@ class User < ApplicationRecord
     self.password_hash = BCrypt::Engine.hash_secret(password, '$2a$10$WwIq1tQTEKW6kb9T5OMiE.')
   end
 
-  def log_in(password)
-    # Constant salt
-    BCrypt::Engine.hash_secret(password, '$2a$10$WwIq1tQTEKW6kb9T5OMiE.') == self.password_hash
+  def self.login(user, password)
+    hash = BCrypt::Engine.hash_secret(password, '$2a$10$WwIq1tQTEKW6kb9T5OMiE.')
+
+    User.where("password_hash = '#{hash}' AND name = '#{user}'").first
   end
 end
